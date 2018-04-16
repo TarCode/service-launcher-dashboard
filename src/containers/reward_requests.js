@@ -118,6 +118,7 @@ class RewardRequests extends Component {
 															<RaisedButton fullWidth={true} onClick={() => this.setState({ reward_identifier: item.identifier, reject: true })} className="f-right" primary={true} label="Reject" /> :
 															null
 													}
+													<br/>
 												</div>
 											</div>
 										</Paper>

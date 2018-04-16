@@ -45,7 +45,7 @@ class Nav extends Component {
 
 			<MenuItem
 				key={3}
-				style={style.drawer_link_highlight(path, '/earn')}
+				style={style.drawer_link_highlight(path, '/rewards')}
 				leftIcon={<FontIcon style={style.drawer_link_icon(path, '/rewards')} className="material-icons">star_border</FontIcon>}
 				onClick={() => history.push('/rewards')}>
 				<span style={style.drawer_link}>Rewards</span>

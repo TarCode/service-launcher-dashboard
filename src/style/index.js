@@ -4,10 +4,10 @@ export const style = {
 	card: {
 		display: 'flex',
 		position: 'relative',
-		padding: '30px 40px 25px',
+		padding: '30px 40px',
 		flexDirection: 'row',
 		borderRadius: '0px',
-		maxWidth: '500px',
+		height: '260px',
 		alignItems: 'center'
 	},
 	card_header: {
@@ -16,22 +16,22 @@ export const style = {
 		padding: '10px 10px 10px',
 		flexDirection: 'row',
 		borderRadius: '0px',
-		maxWidth: '500px',
 		alignItems: 'center',
 		backgroundColor: purple50
 	},
 	card_right: {
-		width: '200px',
+		width: '40%',
 		alignItems: 'center'
 	},
 	card_left: {
-		width: '200px',
+		width: '50%',
 		alignItems: 'center',
 		textAlign: 'center',
 		paddingRight: '20px'
 	},
 	card_left_img: {
-		width: '100%'
+		width: '100%',
+		maxHeight: '220px'
 	},
 	balance_card: {
 		textAlign: 'center',
@@ -39,12 +39,10 @@ export const style = {
 		alignItems: 'center',
 		padding: '30px 15px 25px',
 		position: 'relative',
-		maxWidth: '500px'
 	},
 	transaction_card: {
 		borderRadius: '0px',
-	  maxWidth: '500px',
-	  alignItems: 'center',
+	  	alignItems: 'center',
 		padding: '30px 40px',
 		position: 'relative',
 
@@ -80,7 +78,6 @@ export const style = {
 	},
 	settings_card: {
 		borderRadius: '0px',
-		maxWidth: '500px',
 		alignItems: 'center',
 		padding: '0 0 30px',
 		position: 'relative'

@@ -33,7 +33,7 @@ class Home extends Component {
 								<div className='row'>
 									<br />
 									<div className='col-12'>
-										<Paper style={style.card} zDepth={3}>
+										<Paper style={style.card_header} zDepth={3}>
 											<div style={style.card_left}>
 												<img style={style.card_left_img} src='logo1.svg' alt='logo' />
 											</div>
@@ -41,6 +41,7 @@ class Home extends Component {
 												<h3>{ company_data && company_data.card_display_name }</h3>
 												<p className='cardtext'>{ company_data && company_data.description }</p>
 												<a href="https://rehive.com" rel="noopener noreferrer" target="_blank"><RaisedButton label="Visit Site" secondary={true} /></a>
+												<br/><br/>
 											</div>
 										</Paper>
 										<br />
@@ -64,7 +65,7 @@ class Home extends Component {
 										</Paper>
 										<br />
 									</div>
-									<div className='col-12'>
+									<div className='col-6'>
 										<Paper style={style.card} zDepth={3}>
 											<div style={style.card_left}>
 												<img style={style.card_left_img} src='coins1.svg' alt='coins' />
@@ -78,7 +79,7 @@ class Home extends Component {
 										</Paper>
 										<br />
 									</div>
-									<div className='col-12'>
+									<div className='col-6'>
 										<Paper style={style.card} zDepth={3}>
 											<div style={style.card_left}>
 												<img style={style.card_left_img} src='trading1.svg' alt='market' />
