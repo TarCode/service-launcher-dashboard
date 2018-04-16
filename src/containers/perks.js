@@ -7,7 +7,7 @@ import Loader from '../components/loader'
 import { BigNumber } from 'bignumber.js' 
 import company_data from './config.json'
 import { addPerkData, deletePerkData } from '../actions/admin'
-
+import ShapeDialog from '../components/dialog'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPerkData } from '../actions/perk'
@@ -46,120 +46,82 @@ class Market extends Component {
 			<div className='container'>
 				{
 					isAdmin ?
-					<Dialog
-						repositionOnUpdate={false}
-						autoDetectWindowHeight={false}
-						autoScrollBodyContent={false}
-						contentStyle={{
-							width: '100%',
-							maxWidth: '450px',
-							maxHeight: '100% !important'
-						}}
-						bodyStyle={{
-						maxHeight: '100% !important'
-						}}
-						style={{
-							paddingTop:'0 !important',
-							marginTop:'-65px !important',
-							bottom: '0 !important',
-							overflow: 'scroll !important',
-							height: 'auto !important'
-						}}
-						open={this.state.modal_type ? true : false}
-						onRequestClose={() => this.setState({ modal_type: null })}
-					>
-					<div style={{
-						alignContent: 'center',
-						textAlign: 'center',
-					}}>
-						<h3>{this.state.modal_type === "Delete" ? "Delete Perk" : "Add Perk" }</h3>
-						<form onSubmit={(e) => {
-							e.preventDefault()
-							let data
-							const token = localStorage.getItem('token')
-
-							
-							 if (this.state.modal_type === "Add") {
-								data = { 
-									company: process.env.REACT_APP_COMPANY_IDENTIFIER,
-									perk_name: this.state.name, 
-									description: this.state.description,
-									perk_amount: this.state.amount,
-									user_limit: this.state.user_limit
-								}
-								addPerkData(data, token)
-							} else {
-								deletePerkData(this.state.delete_name, token)
-							}
+					<ShapeDialog
+						is_open={this.state.modal_type ? true : false}
+						close={() => this.setState({ modal_type: null })}
+						modal_content={<div style={{
+							alignContent: 'center',
+							textAlign: 'center',
 						}}>
-							{
-								this.state.modal_type !== "Delete" ?
-								<div>
-										<TextField
-											value={this.state.name}
-											onChange={e => this.setState({ name: e.target.value })}
-											hintText={this.state.modal_type + " Name"}
-											type='text'
-										/><br />
-										<TextField
-											value={this.state.description}
-											onChange={e => this.setState({ description: e.target.value })}
-											hintText={this.state.modal_type + " Description"}
-											type='text'
-										/><br />
-										<TextField
-											value={this.state.amount}
-											onChange={e => this.setState({ amount: e.target.value })}
-											hintText="Amount"
-											type='number'
-										/><br />
-										<TextField
-											value={this.state.user_limit}
-											onChange={e => this.setState({ user_limit: e.target.value })}
-											hintText={this.state.modal_type + " User Limit"}
-											type='number'
-										/><br />
-								</div> :
-								<h5>Are you sure you want to delete this perk?</h5>
-							}
-							<FlatButton
-								label="Cancel"
-								primary={true}
-								onClick={() => this.setState({ modal_type: null, delete_name: null })}
-							/>
-							<FlatButton
-								label={this.state.modal_type === "Delete" ? "Delete" : "Add"}
-								primary={true}
-								keyboardFocused={true}
-								type='submit'
-							/>
-						</form>
-					</div>
-				</Dialog> : null
+							<h3>{this.state.modal_type === "Delete" ? "Delete Perk" : "Add Perk" }</h3>
+							<form onSubmit={(e) => {
+								e.preventDefault()
+								let data
+								const token = localStorage.getItem('token')
+	
+								
+								 if (this.state.modal_type === "Add") {
+									data = { 
+										company: process.env.REACT_APP_COMPANY_IDENTIFIER,
+										perk_name: this.state.name, 
+										description: this.state.description,
+										perk_amount: this.state.amount,
+										user_limit: this.state.user_limit
+									}
+									addPerkData(data, token)
+								} else {
+									deletePerkData(this.state.delete_name, token)
+								}
+							}}>
+								{
+									this.state.modal_type !== "Delete" ?
+									<div>
+											<TextField
+												value={this.state.name}
+												onChange={e => this.setState({ name: e.target.value })}
+												hintText={this.state.modal_type + " Name"}
+												type='text'
+											/><br />
+											<TextField
+												value={this.state.description}
+												onChange={e => this.setState({ description: e.target.value })}
+												hintText={this.state.modal_type + " Description"}
+												type='text'
+											/><br />
+											<TextField
+												value={this.state.amount}
+												onChange={e => this.setState({ amount: e.target.value })}
+												hintText="Amount"
+												type='number'
+											/><br />
+											<TextField
+												value={this.state.user_limit}
+												onChange={e => this.setState({ user_limit: e.target.value })}
+												hintText={this.state.modal_type + " User Limit"}
+												type='number'
+											/><br />
+									</div> :
+									<h5>Are you sure you want to delete this perk?</h5>
+								}
+								<FlatButton
+									label="Cancel"
+									primary={true}
+									onClick={() => this.setState({ modal_type: null, delete_name: null })}
+								/>
+								<FlatButton
+									label={this.state.modal_type === "Delete" ? "Delete" : "Add"}
+									primary={true}
+									keyboardFocused={true}
+									type='submit'
+								/>
+							</form>
+						</div>}
+					/> : null
 				}
-				<Dialog
-					repositionOnUpdate={false}
-					autoDetectWindowHeight={false}
-					autoScrollBodyContent={false}
-					contentStyle={{
-					  width: '100%',
-					  maxWidth: '450px',
-					  maxHeight: '100% !important'
-					}}
-					bodyStyle={{
-					   maxHeight: '100% !important'
-					}}
-					style={{
-					   paddingTop:'0 !important',
-					   marginTop:'-65px !important',
-					   bottom: '0 !important',
-					   overflow: 'scroll !important',
-					   height: 'auto !important'
-					}}
-					open={this.state.perk_amount ? true : false}
-					onRequestClose={() => this.setState({ perk_amount: ''})}
-				>
-					<div style={{
+				<ShapeDialog
+					is_open={this.state.perk_amount ? true : false}
+					close={() => this.setState({ perk_amount: ''})}
+					modal_content={<div style={{
 						alignContent: 'center',
 						textAlign: 'center',
 					}}>
@@ -203,8 +165,8 @@ class Market extends Component {
 								type='submit'
 							/>
 						</form>
-					</div>
-				</Dialog>
+					</div>}
+				/>
 				<div >
 					<br />
 					{
