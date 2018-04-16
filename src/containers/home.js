@@ -11,45 +11,13 @@ import { bindActionCreators } from 'redux'
 
 import Loader from '../components/loader'
 import { style } from '../style/'
+import company_data from './config.json'
 
 class Home extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			notifications: [
-				// {
-				// 	title: "TEST NOTIFICATION 1",
-				// 	text: "This is a test notification"
-				// }
-			],
-			snackbar_open: false,
-			loading: false
-		}
-	}
-
-	handleSnackbarClose = () => {
-		this.setState({
-			snackbar_open: false,
-		});
-	};
-
-	componentDidMount() {
-		this.setState({ loading: true })
-		fetch('./config.json')
-			.then(response => response.json())
-			.then(json => {
-				console.log(json);
-				this.setState({ loading: false, company_data: json })
-			})
-
-	}
-
 	render() {
 
 		const { history, loading, err, data } = this.props
 
-		const { company_data } = this.state
 
 		const x = data && data.balance && new BigNumber(data.balance.balance)
 		const balance = x && x.dividedBy(10000000).toString()
@@ -57,48 +25,13 @@ class Home extends Component {
 		return (
 			<div className='container'>
 				{
-					loading || this.state.loading ?
+					loading ?
 					<Loader/> :
 						(
 							err ?
 							<h3>{err}</h3> :
 								<div className='row'>
-									<Snackbar
-										open={this.state.snackbar_open}
-										message="Notification Dismissed"
-										autoHideDuration={3000}
-										onRequestClose={this.handleSnackbarClose}
-									/>
 									<br />
-									{
-										this.state.notifications.map((item, index) => (
-											<div key={index} className='col-12'>
-												<Paper style={style.card} zDepth={3}>
-													<FontIcon onClick={() => {
-														this.state.notifications.splice(index, 1)
-														this.setState({
-															notifications: this.state.notifications,
-															snackbar_open: true
-														})
-													}} style={{
-														fontSize: 40,
-														position: 'absolute',
-														top: 10,
-														right: 10
-													}} className="material-icons">close</FontIcon>
-													<div className='container'>
-														<div className='row'>
-															<div className='col-12 right'>
-																<h3>{item.title}</h3>
-																<p>{item.text}</p>
-															</div>
-														</div>
-													</div>
-												</Paper>
-												<br />
-											</div>
-										))
-									}
 									<div className='col-12'>
 										<Paper style={style.card} zDepth={3}>
 											<div style={style.card_left}>
