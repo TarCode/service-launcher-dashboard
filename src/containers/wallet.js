@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper';
-import { RaisedButton, Dialog, FlatButton, TextField } from 'material-ui';
+import { RaisedButton, FlatButton, TextField } from 'material-ui';
+import ShapeDialog from '../components/dialog'
 import moment from 'moment'
 import { BigNumber } from 'bignumber.js'
 import { getWalletData } from '../actions/wallet'
@@ -92,51 +93,12 @@ class Wallet extends Component {
 								</div>
 						)
 				}
-				<Dialog
-					title={this.state.token_dialog_msg}
-					actions={[
-						<FlatButton
-							label="Close"
-							primary={true}
-							onClick={this.handleClose}
-						/>,
-						<FlatButton
-							label="Submit"
-							primary={true}
-							onClick={() => {
-								const data = {
-									reference: this.state.recipient,
-									currency: user_data && user_data.currency && user_data.currency.code,
-									amount: this.state.amount * 10000000,
-									memo: this.state.memo,
-									company: user_data && user_data.company
-								}
-								createSend(data)
-							}}
-						/>
-					]}
-					repositionOnUpdate={false}
-					autoDetectWindowHeight={false}
-					autoScrollBodyContent={false}
-					contentStyle={{
-					  width: '100%',
-					  maxWidth: '450px',
-					  maxHeight: '100% !important'
-					}}
-					bodyStyle={{
-					   maxHeight: '100% !important'
-					}}
-					style={{
-					   paddingTop:'0 !important',
-					   marginTop:'-65px !important',
-					   bottom: '0 !important',
-					   overflow: 'scroll !important',
-					   height: 'auto !important'
-					}}
-					open={this.state.token_dialog_msg ? true : false}
-					onRequestClose={this.handleClose}
-				>
-					{
+				<ShapeDialog
+					is_open={this.state.token_dialog_msg ? true : false}
+					close={this.handleClose}
+					modal_content={<div>
+						<h2>{this.state.token_dialog_msg}</h2>
+						{
 						this.state.token_dialog_msg === "Receive Tokens" ?
 							<img style={{
 								height: 300,
@@ -169,7 +131,29 @@ class Wallet extends Component {
 								</div>
 							)
 					}
-				</Dialog>
+					<div>
+						<FlatButton
+							label="Close"
+							primary={true}
+							onClick={this.handleClose}
+						/>
+						<FlatButton
+							label="Submit"
+							primary={true}
+							onClick={() => {
+								const data = {
+									reference: this.state.recipient,
+									currency: user_data && user_data.currency && user_data.currency.code,
+									amount: this.state.amount * 10000000,
+									memo: this.state.memo,
+									company: user_data && user_data.company
+								}
+								createSend(data)
+							}}
+						/>
+					</div>
+					</div>}
+				/>
 			</div>
 		)
 	}
