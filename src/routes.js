@@ -11,7 +11,7 @@ import Nav from './containers/nav'
 import Home from './containers/home'
 import Wallet from './containers/wallet'
 import Market from './containers/market'
-import Earn from './containers/earn'
+import Rewards from './containers/rewards'
 import Landing from './containers/landing'
 import SetPassword from './containers/set_password'
 import ResetPassword from './containers/reset_password'
@@ -70,7 +70,7 @@ render() {
 		const user_data = JSON.parse(localStorage.getItem('user'))
 		const isAdmin = user_data && user_data.groups.filter(i => i.name === 'admin').length > 0;
 
-		const nav_routes = ['/', '/wallet', '/earn', '/perks']
+		const nav_routes = ['/', '/wallet', '/rewards', '/perks']
 
 		if (isAdmin) {
 			nav_routes.push('/reward_requests')
@@ -93,7 +93,7 @@ render() {
 										}
 										<Route exact path='/' component={Home} />
 										<Route exact path='/wallet' component={Wallet} />
-										<Route exact path='/earn' component={Earn} />
+										<Route exact path='/rewards' component={Rewards} />
 										<Route exact path='/perks' component={Market} />
 										{
 											isAdmin ?

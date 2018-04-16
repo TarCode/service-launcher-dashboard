@@ -138,9 +138,9 @@ class Home extends Component {
 											</div>
 											<div style={style.card_right} className='right'>
 												<h3 className='card-heading'>Earn Tokens</h3>
-												<p className='cardtext'> Earn tokens by completing rewards! </p>
+												<p className='cardtext'> Get rewarded tokens for completing tasks </p>
 												<br /><br />
-												<RaisedButton onClick={() => history.push('/earn')} label="Rewards" secondary={true} />
+												<RaisedButton onClick={() => history.push('/rewards')} label="Rewards" secondary={true} />
 											</div>
 										</Paper>
 										<br />
