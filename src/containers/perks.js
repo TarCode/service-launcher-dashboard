@@ -244,7 +244,7 @@ class Market extends Component {
 														const x = new BigNumber(item.perk_amount)
 														const perk_amount = x.dividedBy(10000000).toString()
 														return (
-															<div key={index} className='col-12'>
+															<div key={index} className='col-6'>
 																<Paper style={style.card} zDepth={3}>
 																	{
 																		isAdmin ?
@@ -256,8 +256,8 @@ class Market extends Component {
 																	</div>
 																	<div style={style.card_right} className='right'>
 																		<h3>{item.perk_name}</h3>
-																		<p>{item.description}</p>
-																		<h1>{perk_amount} {user_data && user_data.currency && user_data.currency.code}</h1>
+																		<span>{item.description}</span>
+																		<h2>{perk_amount} {user_data && user_data.currency && user_data.currency.code}</h2>
 																		<RaisedButton onClick={() => this.setState({ perk_amount: item.perk_amount, perk_name: item.perk_name })} className="f-right" primary={true} label="Buy"/>
 																		<br/><br/>
 																	</div>

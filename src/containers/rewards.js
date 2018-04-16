@@ -182,7 +182,7 @@ class Earn extends Component {
 							const x = new BigNumber(item.reward_amount)
 							const reward_amount = x.dividedBy(10000000).toString()
 							return (
-								<div key={index} className='col-12'>
+								<div key={index} className='col-6'>
 									<Paper style={style.card} zDepth={3}>
 									{
 										isAdmin ?
@@ -194,8 +194,8 @@ class Earn extends Component {
 										</div>
 										<div style={style.card_right} className='right'>
 											<h3>{item.reward_type.toUpperCase()}</h3>
-											<p>{item.description}</p>
-											<h1>{reward_amount} {currency}</h1>
+											<span>{item.description}</span>
+											<h2>{reward_amount} {currency}</h2>
 											<RaisedButton onClick={() => { 
 												const user_data = JSON.parse(localStorage.getItem('user'))
 
