@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import Nav from './containers/nav'
 import Home from './containers/home'
 import Wallet from './containers/wallet'
-import Market from './containers/market'
+import Perks from './containers/perks'
 import Rewards from './containers/rewards'
 import Landing from './containers/landing'
 import SetPassword from './containers/set_password'
@@ -94,7 +94,7 @@ render() {
 										<Route exact path='/' component={Home} />
 										<Route exact path='/wallet' component={Wallet} />
 										<Route exact path='/rewards' component={Rewards} />
-										<Route exact path='/perks' component={Market} />
+										<Route exact path='/perks' component={Perks} />
 										{
 											isAdmin ?
 												<Route exact path='/reward_requests' component={RewardRequests} /> :
