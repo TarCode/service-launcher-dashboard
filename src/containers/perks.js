@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper';
-import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField/TextField';
 import { RaisedButton, FlatButton } from 'material-ui';
 import Loader from '../components/loader'

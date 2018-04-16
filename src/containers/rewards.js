@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import TextField from 'material-ui/TextField/TextField';
 import Toggle from 'material-ui/Toggle';
-import Dialog from 'material-ui/Dialog'
+import ShapeDialog from '../components/dialog';
 
 import FlatButton from 'material-ui/FlatButton'
 
@@ -47,29 +47,10 @@ class Earn extends Component {
 			<div className='container'>
 			{
 					isAdmin ?
-					<Dialog
-						repositionOnUpdate={false}
-						autoDetectWindowHeight={false}
-						autoScrollBodyContent={false}
-						contentStyle={{
-							width: '100%',
-							maxWidth: '450px',
-							maxHeight: '100% !important'
-						}}
-						bodyStyle={{
-							maxHeight: '100% !important'
-						}}
-						style={{
-							paddingTop:'0 !important',
-							marginTop:'-65px !important',
-							bottom: '0 !important',
-							overflow: 'scroll !important',
-							height: 'auto !important'
-						}}
-						open={this.state.modal_type ? true : false}
-						onRequestClose={() => this.setState({ modal_type: null })}
-					>
-						<div style={{
+					<ShapeDialog
+						is_open={this.state.modal_type ? true : false}
+						close={() => this.setState({ modal_type: null })}
+						modal_content={<div style={{
 							alignContent: 'center',
 							textAlign: 'center',
 						}}>
@@ -157,8 +138,8 @@ class Earn extends Component {
 									type='submit'
 								/>
 							</form>
-						</div>
-					</Dialog> :
+						</div>}
+					/> :
 					null
 				}
 				<div className='row'>
