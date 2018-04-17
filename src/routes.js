@@ -4,7 +4,6 @@ import {
 	Route
 } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { Provider } from 'react-redux'
 
 import Nav from './containers/nav'
@@ -18,24 +17,17 @@ import ResetPassword from './containers/reset_password'
 import Count from './containers/count'
 import RewardRequests from './containers/reward_requests'
 
-import { callApi } from './utils'
+import { callApi, makeMuiTheme } from './utils'
 
 import { configureStore } from './store'
-import { purpleA700, blue800, grey600, white } from 'material-ui/styles/colors';
+import { 
+	purpleA700, blue800, grey600, white,
+	greenA700, yellow800, orange600
+} from 'material-ui/styles/colors';
 
-const muiTheme = getMuiTheme({
-	palette: {
-		primary1Color: purpleA700,
-		primary2Color: grey600,
-		primary3Color: blue800,
-		canvasColor: white,
-		accent1Color: purpleA700,
-		accent2Color: grey600,
-		accent3Color: blue800,
-	},
-	appBar: {
-	},
-});
+const muiTheme = makeMuiTheme(purpleA700, grey600, blue800, white);
+
+const muiTheme2 = makeMuiTheme(greenA700, yellow800, orange600, white);
 
 const store = configureStore()
 // Protect routes after login works
