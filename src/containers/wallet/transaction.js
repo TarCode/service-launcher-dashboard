@@ -13,11 +13,37 @@ export default class extends Component {
     state = {
 		recipient: '',
 		memo: '',
-		amount: ''
-	};
+        amount: '',
+        loadingReceiveAddress: false,
+        receiveAddress: '',
+        receiveAddressError: null
+    };
+    
+    componentDidMount() {
+        let headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        headers['Authorization'] = `Token ${localStorage.getItem('token')}`
+        let config = {
+            method: 'GET',
+            mode: 'cors',
+            headers
+        }
+        
+        this.setState({ loadingReceiveAddress: true })
+        fetch(process.env.REACT_APP_STELLAR_SERVICE_URL + '/user/account', config)
+        .then(response => response.json())
+        .then(json => {
+            this.setState({ 
+                loadingReceiveAddress: false, 
+                receiveAddress: 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' + encodeURIComponent(json.details.address) + '&choe=UTF-8'
+            })
+        })
+        .catch(err => err)
+    }
     render() {
         const { token_dialog_msg, handleClose, createSend, user_data } = this.props
-
         
         return (
             <ShapeDialog
@@ -27,10 +53,18 @@ export default class extends Component {
                     <h2>{token_dialog_msg}</h2>
                     {
                     token_dialog_msg === "Receive Tokens" ?
-                        <img style={{
-                            height: 300,
-                            width: 300
-                        }} src="qr.jpg" alt='qr' /> : (
+                        <div className='center'>
+                            {
+                                this.state.loadingReceiveAddress ?
+                                <p>Getting Receive Address...</p> :
+                                this.state.receiveAddressError ?
+                                <p>{this.state.receiveAddressError}</p> :
+                                <img style={{
+                                    height: 300,
+                                    width: 300
+                                }} src={this.state.receiveAddress} alt='qr' />
+                            }
+                        </div> : (
                             <div className="center">
                                 <p><b>Add a trustline in the receiving wallet before sending:</b><br />
                                 Asset: SHAPE<br />
