@@ -23,7 +23,7 @@ class Nav extends Component {
 		const { history, match, logout, muiTheme } = this.props
 		const { path } = match
 
-		const { primary1Color, primary2Color, primary3Color } = muiTheme.palette
+		const { primary1Color } = muiTheme.palette
 		const user_data = JSON.parse(localStorage.getItem('user'))
 		
 		const isAdmin = user_data && user_data.groups.filter(i => i.name === 'admin').length > 0;

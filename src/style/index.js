@@ -7,7 +7,6 @@ export const style = {
 		backgroundPosition: "center center",
 		backgroundRepeat:  "no-repeat",
 		backgroundAttachment: "fixed",
-		backgroundSize:  "cover",
 	}),
 	card: {
 		display: 'flex',

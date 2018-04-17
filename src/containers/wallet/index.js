@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper';
-import { RaisedButton, FlatButton, TextField } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 import TransactionDialog from './transaction'
 import moment from 'moment'
 import { BigNumber } from 'bignumber.js'

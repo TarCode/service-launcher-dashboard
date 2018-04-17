@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon'
-import Snackbar from 'material-ui/Snackbar';
 import { getWalletData } from '../actions/wallet'
 import { BigNumber } from 'bignumber.js' 
 

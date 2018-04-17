@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
-import Paper from 'material-ui/Paper';
-import { RaisedButton, FlatButton, TextField } from 'material-ui';
+import { FlatButton, TextField } from 'material-ui';
 import ShapeDialog from '../../components/dialog'
-import moment from 'moment'
-import { BigNumber } from 'bignumber.js'
-import { getWalletData } from '../../actions/wallet'
-import { createSend } from '../../actions/transaction'
-import Loader from '../../components/loader'
-import { style } from '../../style/'
 
 export default class extends Component {
     state = {
