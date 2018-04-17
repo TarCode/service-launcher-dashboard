@@ -1,5 +1,5 @@
 {
-  "name": "launcher_dashboard",
+  "name": "{{cookiecutter.appname}}",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

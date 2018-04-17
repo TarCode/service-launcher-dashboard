@@ -1,0 +1,6 @@
+{
+	"display_name": "{{cookiecutter.appname}}",
+	"subtitle": "{{cookiecutter.subtitle}}",
+	"card_display_name": "{{cookiecutter.card_display_name}}",
+	"description": "{{cookiecutter.description}}"
+}
