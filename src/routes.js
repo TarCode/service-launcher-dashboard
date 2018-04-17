@@ -31,7 +31,7 @@ const muiTheme2 = makeMuiTheme(redA700, yellow800, orange600, cyan100);
 
 const muiTheme = localStorage.getItem('theme') === 'muiTheme2' ? muiTheme2 : muiTheme1;
 
-const bgImage = localStorage.getItem('bg') === 'grey_triangles' ? "url('/img/bg-01.svg')" : "url('/img/bg-02.svg')"
+const bgImage = localStorage.getItem('bg') === 'grey_triangles' ? "url('/img/bg-01.svg')" : "url('/img/bg-02.svg')";
 
 
 const store = configureStore()

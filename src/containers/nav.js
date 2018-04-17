@@ -104,7 +104,25 @@ class Nav extends Component {
 
 							window.location.reload();
 						}}
-						primaryText={"Toggle Themes"}
+						primaryText={"Toggle Theme"}
+					/> : null
+				}
+				{
+					isAdmin ?
+					<ListItem
+						className='center'
+						onClick={() => {
+							console.log("localstorage", localStorage);
+							
+							if (localStorage.getItem('bg') === 'grey_triangles') {
+								localStorage.removeItem('bg')
+							} else {
+								localStorage.setItem('bg', 'grey_triangles')
+							}
+
+							window.location.reload();
+						}}
+						primaryText={"Toggle Background"}
 					/> : null
 				}
 			</List>
