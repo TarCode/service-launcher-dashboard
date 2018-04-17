@@ -100,13 +100,15 @@ render() {
 												null
 										}
 									</div> :
-									<div>
+									<div className='main-land'>
 										<Route exact path='/' component={Landing} />
 										<Route exact path='/setpassword' component={SetPassword} />
 									</div>
 							}
-							<Route exact path='/resetpassword' component={ResetPassword} />
-							<Route exact path='/count' component={Count} />
+							<div className='main-land'>
+								<Route exact path='/resetpassword' component={ResetPassword} />
+								<Route exact path='/count' component={Count} />
+							</div>
 						</div>
 					</Router>
 				</MuiThemeProvider> :
