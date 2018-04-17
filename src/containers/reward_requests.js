@@ -17,12 +17,14 @@ import {
 	TableRow,
 	TableRowColumn,
   } from 'material-ui/Table';
+import TextField from 'material-ui/TextField/TextField';
 
 class RewardRequests extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			reward_identifier: false
+			reward_identifier: false,
+			filter_value: ''
 		}
 	}
 
@@ -101,22 +103,29 @@ class RewardRequests extends Component {
 					</div>
 				</div>
 				<Paper>
+					<div className="container center">
+						<TextField value={this.state.filter_value} onChange={e => this.setState({ filter_value: e.target.value })} fullWidth={true} floatingLabelText="Search Email..."/>
+						<br/><br/>
+					</div>
+				</Paper>
+				<br/>
+				<Paper>
 					<Table selectable={false}>
 						<TableHeader>
 						<TableRow>
 							<TableHeaderColumn>Type</TableHeaderColumn>
-							<TableHeaderColumn>Name</TableHeaderColumn>
+							<TableHeaderColumn>Email</TableHeaderColumn>
 							<TableHeaderColumn>Status</TableHeaderColumn>
 						</TableRow>
 						</TableHeader>
 						<TableBody>
 						{
 							data && data.filter(i => i.state === 'pending').length > 0 ?
-								data.filter(i => i.state === 'pending').map((item, index) => {
+								data.filter(i => i.state === 'pending' && i.user.includes(this.state.filter_value) ).map((item, index) => {
 									return (
 										<TableRow key={index}>
 											<TableRowColumn>{item.reward_type}</TableRowColumn>
-											<TableRowColumn>{item.reward_type}</TableRowColumn>
+											<TableRowColumn>{item.user}</TableRowColumn>
 											<TableRowColumn>
 											{
 												item.state === 'pending' ?
@@ -146,6 +155,7 @@ class RewardRequestsContainer extends Component {
 		const user_data = JSON.parse(localStorage.getItem('user'))
 		this.props.getRewardRequests(user_data.company)
 	}
+	
 
 	render() {
 		const { loading, data, err, approveReward, rejectReward } = this.props
