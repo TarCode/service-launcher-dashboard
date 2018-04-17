@@ -1,12 +1,3 @@
-body {
-	background: url("../img/bg-02.svg");
-	background-size: cover;
-	background-position: center center;
-	background-repeat:  no-repeat;
-	background-attachment: fixed;
-	background-size:  cover;
-}
-
 .landing-row {
 	width: 100%;
 	max-width: 600px;

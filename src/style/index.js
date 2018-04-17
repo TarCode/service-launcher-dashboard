@@ -1,6 +1,14 @@
 import { cyanA200, purpleA700, white, purple50 } from 'material-ui/styles/colors';
 
 export const style = {
+	bodyBg: (file) => ({
+		background: file,
+		backgroundSize: "cover",
+		backgroundPosition: "center center",
+		backgroundRepeat:  "no-repeat",
+		backgroundAttachment: "fixed",
+		backgroundSize:  "cover",
+	}),
 	card: {
 		display: 'flex',
 		position: 'relative',

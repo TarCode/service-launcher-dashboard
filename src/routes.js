@@ -16,7 +16,7 @@ import SetPassword from './containers/set_password'
 import ResetPassword from './containers/reset_password'
 import Count from './containers/count'
 import RewardRequests from './containers/reward_requests'
-
+import { style } from './style/index'
 import { callApi, makeMuiTheme } from './utils'
 
 import { configureStore } from './store'
@@ -30,6 +30,8 @@ const muiTheme1 = makeMuiTheme(purpleA700, grey600, blue800, white);
 const muiTheme2 = makeMuiTheme(redA700, yellow800, orange600, cyan100);
 
 const muiTheme = localStorage.getItem('theme') === 'muiTheme2' ? muiTheme2 : muiTheme1;
+
+const bgImage = localStorage.getItem('bg') === 'grey_triangles' ? "url('/img/bg-01.svg')" : "url('/img/bg-02.svg')"
 
 
 const store = configureStore()
@@ -79,7 +81,7 @@ render() {
 					muiTheme && typeof muiTheme === 'object' ?
 					<MuiThemeProvider muiTheme={muiTheme}>
 					<Router>
-						<div>
+						<div style={style.bodyBg(bgImage)}>
 							{
 								token ?
 									<div className='main'>
