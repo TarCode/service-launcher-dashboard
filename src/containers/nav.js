@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import { FlatButton } from 'material-ui'
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -19,17 +20,19 @@ class Nav extends Component {
 	}
 
 	render() {
-		const { history, match, logout } = this.props
+		const { history, match, logout, muiTheme } = this.props
 		const { path } = match
-		const user_data = JSON.parse(localStorage.getItem('user'))
 
+		const { primary1Color, primary2Color, primary3Color } = muiTheme.palette
+		const user_data = JSON.parse(localStorage.getItem('user'))
+		
 		const isAdmin = user_data && user_data.groups.filter(i => i.name === 'admin').length > 0;
 
 		const drawer_contents = [
 			<img style={style.drawer_logo} key={0} alt='logo' className='nav-img' src='./logo.1.png' />,
 			<MenuItem
 				key={1}
-				style={style.drawer_link_highlight(path, '/')}
+				style={style.drawer_link_highlight(path, '/', primary1Color)}
 				leftIcon={<FontIcon style={style.drawer_link_icon(path, '/')} className="material-icons">change_history</FontIcon>}
 				onClick={() => history.push('/')}>
 				<span style={style.drawer_link}>Home</span>
@@ -37,7 +40,7 @@ class Nav extends Component {
 
 			<MenuItem
 				key={2}
-				style={style.drawer_link_highlight(path, '/wallet')}
+				style={style.drawer_link_highlight(path, '/wallet', primary1Color)}
 				leftIcon={<FontIcon style={style.drawer_link_icon(path, '/wallet')} className="material-icons">crop_square</FontIcon>}
 				onClick={() => history.push('/wallet')}>
 				<span style={style.drawer_link}>Wallet</span>
@@ -45,7 +48,7 @@ class Nav extends Component {
 
 			<MenuItem
 				key={3}
-				style={style.drawer_link_highlight(path, '/rewards')}
+				style={style.drawer_link_highlight(path, '/rewards', primary1Color)}
 				leftIcon={<FontIcon style={style.drawer_link_icon(path, '/rewards')} className="material-icons">star_border</FontIcon>}
 				onClick={() => history.push('/rewards')}>
 				<span style={style.drawer_link}>Rewards</span>
@@ -53,7 +56,7 @@ class Nav extends Component {
 
 			<MenuItem
 				key={4}
-				style={style.drawer_link_highlight(path, '/perks')}
+				style={style.drawer_link_highlight(path, '/perks', primary1Color)}
 				leftIcon={<FontIcon style={style.drawer_link_icon(path, '/perks')} className="material-icons">crop_7_5</FontIcon>}
 				onClick={() => history.push('/perks')}>
 				<span style={style.drawer_link}>Perks</span>
@@ -64,7 +67,7 @@ class Nav extends Component {
 			drawer_contents.push(
 				<MenuItem
 					key={5}
-					style={style.drawer_link_highlight(path, '/reward_requests')}
+					style={style.drawer_link_highlight(path, '/reward_requests', primary1Color)}
 					leftIcon={<FontIcon style={style.drawer_link_icon(path, '/reward_requests')} className="material-icons">chat_bubble_outline</FontIcon>}
 					onClick={() => history.push('/reward_requests')}>
 					<span style={style.drawer_link}>Requests</span>
@@ -86,6 +89,24 @@ class Nav extends Component {
 					primaryText={user_data.username}
 					secondaryText={user_data.email}
 				/>
+				{
+					isAdmin ?
+					<ListItem
+						className='center'
+						onClick={() => {
+							console.log("localstorage", localStorage);
+							
+							if (localStorage.getItem('theme') === 'muiTheme1') {
+								localStorage.setItem('theme', 'muiTheme2')
+							} else {
+								localStorage.setItem('theme', 'muiTheme1')
+							}
+
+							window.location.reload();
+						}}
+						primaryText={"Toggle Themes"}
+					/> : null
+				}
 			</List>
 		)
 
@@ -119,4 +140,4 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default muiThemeable()(connect(mapStateToProps, mapDispatchToProps)(Nav))

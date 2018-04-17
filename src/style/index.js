@@ -61,11 +61,11 @@ export const style = {
 		position: 'absolute',
 		left: '60%'
 	},
-	drawer_link_highlight: (path, route) => ({
-		backgroundColor: path === route ? purpleA700 : null,
+	drawer_link_highlight: (path, route, color) => ({
+		backgroundColor: path === route ? color : null,
 		color: path === route ? white : null,
 	}),
-	drawer_link_icon: (path, route) => ({ 
+	drawer_link_icon: (path, route, color) => ({ 
 		color: path === route ? white : cyanA200,
 		position: 'absolute', 
 		left: '40%' 

@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux'
-
+import Loader from './components/loader'
 import Nav from './containers/nav'
 import Home from './containers/home'
 import Wallet from './containers/wallet'
@@ -22,12 +22,15 @@ import { callApi, makeMuiTheme } from './utils'
 import { configureStore } from './store'
 import { 
 	purpleA700, blue800, grey600, white,
-	greenA700, yellow800, orange600
+	redA700, yellow800, orange600, cyan100
 } from 'material-ui/styles/colors';
 
-const muiTheme = makeMuiTheme(purpleA700, grey600, blue800, white);
+const muiTheme1 = makeMuiTheme(purpleA700, grey600, blue800, white);
 
-const muiTheme2 = makeMuiTheme(greenA700, yellow800, orange600, white);
+const muiTheme2 = makeMuiTheme(redA700, yellow800, orange600, cyan100);
+
+const muiTheme = localStorage.getItem('theme') === 'muiTheme2' ? muiTheme2 : muiTheme1;
+
 
 const store = configureStore()
 // Protect routes after login works
@@ -72,7 +75,9 @@ render() {
 
 		return (
 			<Provider store={store}>
-				<MuiThemeProvider muiTheme={muiTheme}>
+				{
+					muiTheme && typeof muiTheme === 'object' ?
+					<MuiThemeProvider muiTheme={muiTheme}>
 					<Router>
 						<div>
 							{
@@ -102,7 +107,9 @@ render() {
 							<Route exact path='/count' component={Count} />
 						</div>
 					</Router>
-				</MuiThemeProvider>
+				</MuiThemeProvider> :
+				<Loader/>
+				}
 			</Provider>
 		)
 	}
