@@ -40,7 +40,7 @@ export default class extends Component {
                 receiveAddress: 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' + encodeURIComponent(json.details.address) + '&choe=UTF-8'
             })
         })
-        .catch(err => err)
+        .catch(err => this.setState({ receiveAddressError: err }))
     }
     render() {
         const { token_dialog_msg, handleClose, createSend, user_data } = this.props
