@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
 import Paper from 'material-ui/Paper';
 import { RaisedButton, FlatButton, TextField } from 'material-ui';
-import ShapeDialog from '../components/dialog'
+import TransactionDialog from './transaction'
 import moment from 'moment'
 import { BigNumber } from 'bignumber.js'
-import { getWalletData } from '../actions/wallet'
-import { createSend } from '../actions/transaction'
+import { getWalletData } from '../../actions/wallet'
+import { createSend } from '../../actions/transaction'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Loader from '../components/loader'
-import { style } from '../style/'
+import Loader from '../../components/loader'
+import { style } from '../../style/'
 
 class Wallet extends Component {
 	state = {
-		token_dialog_msg: "",
-		recipient: '',
-		memo: '',
-		amount: ''
+		token_dialog_msg: ""
 	};
 
 	handleToken_dialog_msg = (msg) => {
@@ -93,66 +90,11 @@ class Wallet extends Component {
 								</div>
 						)
 				}
-				<ShapeDialog
-					is_open={this.state.token_dialog_msg ? true : false}
-					close={this.handleClose}
-					modal_content={<div>
-						<h2>{this.state.token_dialog_msg}</h2>
-						{
-						this.state.token_dialog_msg === "Receive Tokens" ?
-							<img style={{
-								height: 300,
-								width: 300
-							}} src="qr.jpg" alt='qr' /> : (
-								<div className="center">
-									<p><b>Add a trustline in the receiving wallet before sending:</b><br />
-									Asset: SHAPE<br />
-									Issuer: BPRS63VQIKJP5VNNEV3TQEH6FCVMTZ6ZHK4CJFPLKKPXLBVYFZ62HJP</p>
-									<TextField 
-										value={this.state.recipient} 
-										type="text" 
-										hintText="Email or stellar address" 
-										onChange={e => this.setState({ recipient: e.target.value })}
-									/>
-									<br/>
-									<TextField 
-										value={this.state.amount} 
-										type="number"
-										onChange={e => this.setState({ amount: e.target.value })}
-										hintText="Amount" 
-									/>
-									<br/>
-									<TextField 
-										value={this.state.memo} 
-										type="text" 
-										onChange={e => this.setState({ memo: e.target.value })}
-										hintText="Memo" 
-									/>
-								</div>
-							)
-					}
-					<div>
-						<FlatButton
-							label="Close"
-							primary={true}
-							onClick={this.handleClose}
-						/>
-						<FlatButton
-							label="Submit"
-							primary={true}
-							onClick={() => {
-								const data = {
-									reference: this.state.recipient,
-									currency: user_data && user_data.currency && user_data.currency.code,
-									amount: this.state.amount * 10000000,
-									memo: this.state.memo,
-									company: user_data && user_data.company
-								}
-								createSend(data)
-							}}
-						/>
-					</div>
-					</div>}
+				<TransactionDialog
+					token_dialog_msg={this.state.token_dialog_msg}
+					handleClose={this.handleClose}
+					createSend={createSend}
+					user_data={user_data}
 				/>
 			</div>
 		)
