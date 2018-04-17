@@ -8,8 +8,15 @@ import Loader from '../components/loader'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getRewardRequests, approveReward, rejectReward } from '../actions/reward_requests'
-
 import { style } from '../style/'
+import {
+	Table,
+	TableBody,
+	TableHeader,
+	TableHeaderColumn,
+	TableRow,
+	TableRowColumn,
+  } from 'material-ui/Table';
 
 class RewardRequests extends Component {
 	constructor(props) {
@@ -92,52 +99,43 @@ class RewardRequests extends Component {
 						</Paper>
 						<br />
 					</div>
-					{
-						data && data.filter(i => i.state === 'pending').length > 0 ?
-							data.filter(i => i.state === 'pending').map((item, index) => {
-								return (
-									<div key={index} className='col-12'>
-										<Paper style={style.card} zDepth={3}>
-											<div style={style.card_left}>
-												<img style={style.card_left_img} alt='logo' src='trading1.svg' />
-											</div>
-											<div style={style.card_right} className='right'>
-												<h3>{item.reward_type}</h3>
-												<p>{item.user}</p>
-												<div>
-													{
-														item.state === 'pending' ?
-															<RaisedButton fullWidth={true} onClick={() => this.setState({ reward_identifier: item.identifier })} className="f-right" primary={true} label="Approve" /> :
-															<RaisedButton className="f-right" disabled={true} label="Approved" />
-													}
-												</div>
-													<br/><br/><br/>
-												<div>
-													{
-														item.state === 'pending' ?
-															<RaisedButton fullWidth={true} onClick={() => this.setState({ reward_identifier: item.identifier, reject: true })} className="f-right" primary={true} label="Reject" /> :
-															null
-													}
-													<br/>
-												</div>
-											</div>
-										</Paper>
-										<br />
-									</div>
-								)
-							}) :
-							<div className='col-12'>
-								<Paper style={style.transaction_card} zDepth={3}>
-									<div className='container center'>
-										<br />
-										<h3>No Reward Requests</h3>
-										<br />
-									</div>
-								</Paper>
-								<br />
-							</div>
-					}
 				</div>
+				<Paper>
+					<Table selectable={false}>
+						<TableHeader>
+						<TableRow>
+							<TableHeaderColumn>Type</TableHeaderColumn>
+							<TableHeaderColumn>Name</TableHeaderColumn>
+							<TableHeaderColumn>Status</TableHeaderColumn>
+						</TableRow>
+						</TableHeader>
+						<TableBody>
+						{
+							data && data.filter(i => i.state === 'pending').length > 0 ?
+								data.filter(i => i.state === 'pending').map((item, index) => {
+									return (
+										<TableRow key={index}>
+											<TableRowColumn>{item.reward_type}</TableRowColumn>
+											<TableRowColumn>{item.reward_type}</TableRowColumn>
+											<TableRowColumn>
+											{
+												item.state === 'pending' ?
+													<RaisedButton style={{ marginRight: '5px' }} onClick={() => this.setState({ reward_identifier: item.identifier })} primary={true} label="Approve" /> :
+													<RaisedButton className="f-right" disabled={true} label="Approved" />
+											}
+											{
+												item.state === 'pending' ?
+													<RaisedButton onClick={() => this.setState({ reward_identifier: item.identifier, reject: true })} primary={true} label="Reject" /> :
+													null
+											}
+											</TableRowColumn>
+										</TableRow>
+									)
+								}) : null
+						}
+						</TableBody>
+					</Table>
+				</Paper>
 			</div>
 		)
 	}
